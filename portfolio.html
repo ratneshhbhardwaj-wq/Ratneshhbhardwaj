@@ -6,722 +6,370 @@
 <title>Ratnesh Bhardwaj — Video Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --black: #080808;
-    --white: #F2F0EB;
-    --accent: #E8FF47;
-    --accent2: #FF4D1C;
-    --mid: #1A1A1A;
-    --border: rgba(242,240,235,0.1);
-    --text-muted: rgba(242,240,235,0.45);
-  }
+  :root{--black:#080808;--white:#F2F0EB;--accent:#E8FF47;--mid:#141414;--mid2:#1A1A1A;--border:rgba(242,240,235,0.08);--muted:rgba(242,240,235,0.45)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none}
+  .cursor{width:10px;height:10px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;mix-blend-mode:difference}
+  .cursor.big{width:36px;height:36px}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:.35}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:100px 64px 80px;position:relative;border-bottom:1px solid var(--border)}
+  .hero-tag{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fu .6s .1s forwards}
+  .hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,13vw,172px);line-height:.88;opacity:0;animation:fu .7s .25s forwards}
+  .hero-name span{color:var(--accent)}
+  .hero-sub{font-size:clamp(15px,1.8vw,20px);font-weight:300;color:var(--muted);margin-top:36px;max-width:520px;line-height:1.65;opacity:0;animation:fu .7s .4s forwards}
+  .hero-sub strong{color:var(--white);font-weight:500}
+  .hero-stats{display:flex;gap:48px;margin-top:60px;flex-wrap:wrap;opacity:0;animation:fu .7s .55s forwards}
+  .stat{border-left:2px solid var(--accent);padding-left:16px}
+  .stat-num{font-family:'Bebas Neue',sans-serif;font-size:38px;line-height:1}
+  .stat-lbl{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--muted);margin-top:4px}
+  .scroll-hint{position:absolute;bottom:40px;right:64px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--muted);writing-mode:vertical-rl;display:flex;align-items:center;gap:10px;opacity:0;animation:fu .6s 1s forwards}
+  .scroll-hint::before{content:'';display:block;width:1px;height:48px;background:var(--border)}
 
-  html { scroll-behavior: smooth; }
+  .section{padding:80px 64px;border-bottom:1px solid var(--border)}
+  .sec-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.25em;color:var(--accent);text-transform:uppercase;margin-bottom:40px;display:flex;align-items:center;gap:16px}
+  .sec-label::after{content:'';height:1px;flex:1;background:var(--border)}
 
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    overflow-x: hidden;
-    cursor: none;
-  }
+  .org-block{margin-bottom:64px}
+  .org-block:last-child{margin-bottom:0}
+  .org-header{display:flex;align-items:center;gap:12px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+  .org-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.04em}
+  .otag{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--muted);border:1px solid var(--border);padding:4px 10px;text-transform:uppercase}
+  .otag.hot{background:var(--accent);color:var(--black);border-color:var(--accent);font-weight:700}
 
-  /* Custom cursor */
-  .cursor {
-    width: 12px; height: 12px;
-    background: var(--accent);
-    border-radius: 50%;
-    position: fixed; top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease, width 0.2s, height 0.2s;
-    mix-blend-mode: difference;
-  }
-  .cursor.big { width: 40px; height: 40px; }
+  .hero-card{background:var(--mid2);border:1px solid rgba(232,255,71,.15);padding:48px;position:relative;overflow:hidden;margin-bottom:2px}
+  .hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent)}
+  .hc-badge{display:inline-block;background:var(--accent);color:var(--black);font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.15em;padding:5px 12px;text-transform:uppercase;margin-bottom:20px}
+  .hc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,80px);line-height:.95;margin-bottom:20px}
+  .hc-desc{font-size:15px;color:var(--muted);line-height:1.65;max-width:520px;margin-bottom:32px}
+  .hc-desc strong{color:var(--white)}
 
-  /* Noise overlay */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.4;
-  }
+  .btn-row{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-decoration:none;border:1px solid;transition:all .2s;cursor:none}
+  .btn-p{background:var(--accent);color:var(--black);border-color:var(--accent)}
+  .btn-p:hover{background:transparent;color:var(--accent)}
+  .btn-g{background:transparent;color:var(--white);border-color:var(--border)}
+  .btn-g:hover{border-color:var(--white)}
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 80px 60px 60px;
-    position: relative;
-    border-bottom: 1px solid var(--border);
-  }
+  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2px}
+  .vgrid.solo{grid-template-columns:1fr;max-width:680px}
+  .vgrid.duo{grid-template-columns:repeat(2,1fr)}
 
-  .hero-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.2s forwards;
-  }
+  .vc{background:var(--mid);overflow:hidden;cursor:none;transition:transform .3s;position:relative}
+  .vc:hover{transform:scale(1.015);z-index:2}
+  .vthumb{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .vt-txt{font-family:'Bebas Neue',sans-serif;font-size:48px;color:rgba(255,255,255,.06);text-align:center;padding:20px;line-height:1;user-select:none}
+  .play{position:absolute;width:54px;height:54px;border-radius:50%;border:1.5px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;transition:all .25s}
+  .vc:hover .play{background:var(--accent);border-color:var(--accent)}
+  .play svg{fill:white;width:18px;margin-left:3px}
+  .vc:hover .play svg{fill:var(--black)}
+  .vbody{padding:20px 22px}
+  .vcat{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
+  .vtitle{font-size:15px;font-weight:500;line-height:1.3;margin-bottom:8px}
+  .vdesc{font-size:12px;color:var(--muted);line-height:1.55;margin-bottom:16px}
+  .vlink{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--accent);text-decoration:none;text-transform:uppercase;border-bottom:1px solid transparent;transition:border-color .2s;cursor:none}
+  .vlink:hover{border-color:var(--accent)}
 
-  .hero-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(72px, 12vw, 160px);
-    line-height: 0.9;
-    letter-spacing: -0.02em;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.35s forwards;
-  }
+  .t-cb{background:linear-gradient(135deg,#12005C,#4A00E0)}
+  .t-ai{background:linear-gradient(135deg,#050510,#1A0A3A)}
+  .t-trip{background:linear-gradient(135deg,#0A1205,#1E3010)}
+  .t-ph{background:linear-gradient(135deg,#1A0A0A,#3A1010)}
+  .t-ph2{background:linear-gradient(135deg,#0D1A0A,#1A3A10)}
+  .t-phlogo{background:linear-gradient(135deg,#0A0A00,#2A2800)}
+  .t-vu{background:linear-gradient(135deg,#051020,#0A2A4A)}
+  .t-tedx{background:linear-gradient(135deg,#1A0000,#4A0000)}
+  .t-yt1{background:linear-gradient(135deg,#100505,#3A0A0A)}
+  .t-yt2{background:linear-gradient(135deg,#050510,#1A1A4A)}
+  .t-yt3{background:linear-gradient(135deg,#100A00,#3A2800)}
+  .t-mh{background:linear-gradient(135deg,#0A0A1A,#1A1A4A)}
 
-  .hero-name span { color: var(--accent); }
+  .stats-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:2px;margin-top:2px}
+  .ss{background:var(--mid);padding:28px 24px}
+  .ss-num{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--accent);line-height:1}
+  .ss-lbl{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.4}
 
-  .hero-sub {
-    font-family: 'DM Sans', sans-serif;
-    font-size: clamp(16px, 2vw, 22px);
-    font-weight: 300;
-    color: var(--text-muted);
-    margin-top: 32px;
-    max-width: 560px;
-    line-height: 1.6;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.5s forwards;
-  }
+  .tools-wrap{display:flex;flex-wrap:wrap;gap:8px}
+  .tool{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;padding:7px 14px;border:1px solid var(--border);color:var(--muted);transition:all .2s}
+  .tool.on,.tool:hover{border-color:var(--accent);color:var(--accent)}
 
-  .hero-sub strong { color: var(--white); font-weight: 500; }
+  .bonus{background:var(--mid);padding:40px 48px;border-left:3px solid var(--accent)}
+  .bonus-q{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--accent);margin-bottom:16px}
+  .bonus-a{font-size:15px;line-height:1.75;max-width:680px}
+  .bonus-a p+p{margin-top:12px}
 
-  .hero-stats {
-    display: flex;
-    gap: 48px;
-    margin-top: 56px;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.65s forwards;
-    flex-wrap: wrap;
-  }
+  .footer{padding:80px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:32px}
+  .footer-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,80px);line-height:1}
+  .footer-title span{color:var(--accent)}
+  .footer-sub{color:var(--muted);font-size:13px;margin-top:8px}
 
-  .stat { border-left: 2px solid var(--accent); padding-left: 16px; }
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    color: var(--white);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 11px;
-    color: var(--text-muted);
-    font-family: 'Space Mono', monospace;
-    letter-spacing: 0.1em;
-    margin-top: 4px;
-  }
+  @keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .fi{opacity:0;transform:translateY(18px);transition:opacity .55s,transform .55s}
+  .fi.vis{opacity:1;transform:none}
 
-  .hero-scroll {
-    position: absolute;
-    bottom: 40px; right: 60px;
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--text-muted);
-    writing-mode: vertical-rl;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .hero-scroll::before {
-    content: '';
-    display: block;
-    width: 1px; height: 48px;
-    background: var(--border);
-  }
-
-  /* SECTION */
-  section {
-    padding: 80px 60px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .section-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 48px;
-    display: flex; align-items: center; gap: 16px;
-  }
-  .section-label::after {
-    content: '';
-    height: 1px;
-    flex: 1;
-    background: var(--border);
-  }
-
-  /* FEATURED — Coursebox Ad */
-  .featured {
-    background: var(--mid);
-    border-radius: 4px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .featured-inner {
-    padding: 48px;
-  }
-
-  .featured-badge {
-    display: inline-block;
-    background: var(--accent);
-    color: var(--black);
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    font-weight: 700;
-    padding: 6px 12px;
-    margin-bottom: 24px;
-    text-transform: uppercase;
-  }
-
-  .featured-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 5vw, 64px);
-    line-height: 1;
-    margin-bottom: 16px;
-  }
-
-  .featured-desc {
-    font-size: 15px;
-    color: var(--text-muted);
-    line-height: 1.6;
-    max-width: 480px;
-    margin-bottom: 32px;
-  }
-
-  .featured-desc strong { color: var(--white); }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 28px;
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-decoration: none;
-    border: 1px solid;
-    transition: all 0.2s;
-    cursor: none;
-  }
-
-  .btn-primary {
-    background: var(--accent);
-    color: var(--black);
-    border-color: var(--accent);
-  }
-  .btn-primary:hover { background: transparent; color: var(--accent); }
-
-  .btn-ghost {
-    background: transparent;
-    color: var(--white);
-    border-color: var(--border);
-  }
-  .btn-ghost:hover { border-color: var(--white); }
-
-  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
-
-  /* VIDEO GRID */
-  .video-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 2px;
-  }
-
-  .video-card {
-    background: var(--mid);
-    position: relative;
-    overflow: hidden;
-    cursor: none;
-    transition: transform 0.3s;
-  }
-  .video-card:hover { transform: scale(1.02); z-index: 2; }
-  .video-card:hover .card-overlay { opacity: 1; }
-
-  .card-thumb {
-    width: 100%;
-    aspect-ratio: 16/9;
-    background: #111;
-    display: flex; align-items: center; justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .card-thumb-inner {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 48px;
-    color: rgba(255,255,255,0.07);
-    text-align: center;
-    padding: 20px;
-    line-height: 1;
-  }
-
-  .play-icon {
-    position: absolute;
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.3);
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
-  }
-  .video-card:hover .play-icon {
-    background: var(--accent);
-    border-color: var(--accent);
-  }
-  .play-icon svg { fill: white; width: 20px; margin-left: 4px; }
-  .video-card:hover .play-icon svg { fill: var(--black); }
-
-  .card-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .card-body {
-    padding: 20px;
-    position: relative;
-  }
-
-  .card-cat {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
-  .card-title {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    margin-bottom: 6px;
-    line-height: 1.3;
-  }
-
-  .card-desc {
-    font-size: 12px;
-    color: var(--text-muted);
-    line-height: 1.5;
-    margin-bottom: 16px;
-  }
-
-  .card-link {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    text-decoration: none;
-    display: inline-flex; align-items: center; gap: 6px;
-    text-transform: uppercase;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
-    cursor: none;
-  }
-  .card-link:hover { border-color: var(--accent); }
-
-  /* THUMBNAIL COLORS */
-  .thumb-cb { background: linear-gradient(135deg, #1B0E5C 0%, #4A00E0 100%); }
-  .thumb-ph { background: linear-gradient(135deg, #0D2B0D 0%, #1A5C1A 100%); }
-  .thumb-yt { background: linear-gradient(135deg, #1A0000 0%, #5C0000 100%); }
-  .thumb-ig { background: linear-gradient(135deg, #1A0A2E 0%, #5C1A3A 100%); }
-  .thumb-ai { background: linear-gradient(135deg, #0A0A1A 0%, #1A1A4A 100%); }
-
-  /* STATS ROW */
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 2px;
-    margin-top: 2px;
-  }
-
-  .stat-card {
-    background: var(--mid);
-    padding: 32px 28px;
-  }
-
-  .stat-card-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 52px;
-    line-height: 1;
-    color: var(--accent);
-  }
-
-  .stat-card-label {
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-top: 8px;
-    line-height: 1.4;
-  }
-
-  /* TOOLS */
-  .tools-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .tool-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    padding: 8px 16px;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    transition: all 0.2s;
-  }
-  .tool-tag:hover { border-color: var(--accent); color: var(--accent); }
-  .tool-tag.highlight { border-color: var(--accent); color: var(--accent); }
-
-  /* BONUS */
-  .bonus-box {
-    background: var(--mid);
-    padding: 40px 48px;
-    border-left: 3px solid var(--accent);
-    margin-top: 2px;
-  }
-
-  .bonus-q {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    color: var(--accent);
-    margin-bottom: 16px;
-  }
-
-  .bonus-a {
-    font-size: 15px;
-    line-height: 1.7;
-    color: var(--white);
-    max-width: 700px;
-  }
-
-  .bonus-a p + p { margin-top: 12px; }
-
-  /* FOOTER CTA */
-  .footer-cta {
-    padding: 80px 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 32px;
-  }
-
-  .footer-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 5vw, 72px);
-    line-height: 1;
-  }
-  .footer-title span { color: var(--accent); }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .fade-in.visible { opacity: 1; transform: none; }
-
-  @media (max-width: 768px) {
-    .hero, section { padding: 60px 24px; }
-    .footer-cta { padding: 60px 24px; }
-    .featured-inner { padding: 28px; }
-    .bonus-box { padding: 28px 24px; }
-    .hero-stats { gap: 28px; }
+  @media(max-width:768px){
+    .hero,.section,.footer{padding:60px 24px}
+    .hero-card{padding:28px 24px}
+    .bonus{padding:28px 24px}
+    .vgrid.duo{grid-template-columns:1fr}
+    .scroll-hint{display:none}
   }
 </style>
 </head>
 <body>
-
 <div class="cursor" id="cursor"></div>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">Video Portfolio · 2025–2026</div>
+  <div class="hero-tag">Video Portfolio · Ratnesh Bhardwaj · 2025–2026</div>
   <h1 class="hero-name">Ratnesh<br><span>Bhardwaj</span></h1>
-  <p class="hero-sub">
-    Marketing strategist who edits. <strong>Long form, short form, B2B ads, AI-generated cinematics.</strong> Started at 17 with zero — built a client base, then a brand, then a production pipeline powered by AI.
-  </p>
+  <p class="hero-sub">Marketing strategist who edits. <strong>Long form. Short form. B2B ads. AI-generated cinematics.</strong> Started at 17 with zero — built a client base, then a brand, then a full AI production pipeline.</p>
   <div class="hero-stats">
-    <div class="stat">
-      <div class="stat-num">5+</div>
-      <div class="stat-label">Years editing</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">3</div>
-      <div class="stat-label">YouTube clients managed</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">15K+</div>
-      <div class="stat-label">Views · TEDxUWA Instagram · 90 days</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">141K</div>
-      <div class="stat-label">Single video · Super Sam channel</div>
-    </div>
+    <div class="stat"><div class="stat-num">5+</div><div class="stat-lbl">Years editing</div></div>
+    <div class="stat"><div class="stat-num">141K</div><div class="stat-lbl">Single video views</div></div>
+    <div class="stat"><div class="stat-num">15K+</div><div class="stat-lbl">TEDxUWA · 90 days</div></div>
+    <div class="stat"><div class="stat-num">+125%</div><div class="stat-lbl">Reach growth · 30 days</div></div>
   </div>
-  <div class="hero-scroll">scroll</div>
+  <div class="scroll-hint">scroll</div>
 </div>
 
-<!-- FEATURED -->
-<section>
-  <div class="section-label">Featured Work</div>
-  <div class="featured fade-in">
-    <div class="featured-inner">
-      <div class="featured-badge">★ Made for Coursebox AI</div>
-      <h2 class="featured-title">Coursebox AI<br>Product Ad</h2>
-      <p class="featured-desc">
-        A <strong>B2B product ad</strong> built specifically for Coursebox — from concept to final edit overnight. Higgsfield AI scene generation + CapCut pipeline. Problem → realisation → product reveal structure. Edited to land with L&D managers and business owners, not consumers.
-      </p>
+<!-- WORK -->
+<div class="section">
+  <div class="sec-label">Work</div>
+
+  <!-- COURSEBOX -->
+  <div class="org-block fi">
+    <div class="org-header">
+      <div class="org-name">Coursebox AI</div>
+      <span class="otag hot">★ Made for this application</span>
+      <span class="otag">B2B SaaS · Perth</span>
+    </div>
+    <div class="hero-card">
+      <div class="hc-badge">Featured · Product Ad</div>
+      <div class="hc-title">Coursebox AI<br>Product Ad</div>
+      <p class="hc-desc">A <strong>B2B product ad built overnight specifically for Coursebox.</strong> Higgsfield AI + CapCut pipeline. Emotional arc: problem → breaking point → product as relief. Built to land with L&D managers and business owners — not consumers.</p>
       <div class="btn-row">
-        <a href="https://drive.google.com/file/d/180QcR6xijSG_fNf4mKAf0RwwsO2mrtf0/view?usp=sharing" target="_blank" class="btn btn-primary">▶ Watch the Ad</a>
+        <a href="https://drive.google.com/file/d/180QcR6xijSG_fNf4mKAf0RwwsO2mrtf0/view?usp=sharing" target="_blank" class="btn btn-p">▶ Watch the Ad</a>
       </div>
     </div>
   </div>
-</section>
 
-<!-- VIDEO WORK -->
-<section>
-  <div class="section-label">Video Work</div>
-  <div class="video-grid">
-
-    <div class="video-card fade-in">
-      <div class="card-thumb thumb-ph">
-        <div class="card-thumb-inner">PHOENIX</div>
-        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="card-overlay"></div>
+  <!-- PERSONAL -->
+  <div class="org-block fi">
+    <div class="org-header">
+      <div class="org-name">Personal Work</div>
+      <span class="otag">AI Cinematic · Casual Edit</span>
+    </div>
+    <div class="vgrid duo">
+      <div class="vc">
+        <div class="vthumb t-ai"><div class="vt-txt">AI INTRO</div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="vbody">
+          <div class="vcat">AI Generated · Personal Brand · 2025</div>
+          <div class="vtitle">Personal Brand Intro — AI Cinematic</div>
+          <div class="vdesc">Full AI pipeline — Higgsfield Soul Cinema for scene generation, CapCut for edit and grade. Cinematic, character-driven brand storytelling.</div>
+          <a href="https://drive.google.com/file/d/1yvSKoOZ_C7jvQVigEzlxJWNfuT0B7y9E/view?usp=sharing" target="_blank" class="vlink">Watch ↗</a>
+        </div>
       </div>
-      <div class="card-body">
-        <div class="card-cat">NFP · Instagram Reel · 2026</div>
-        <div class="card-title">Phoenix Support — Latest Content</div>
-        <div class="card-desc">Short-form content for a WA not-for-profit. Community-first storytelling, on-brand execution.</div>
-        <a href="https://www.instagram.com/reel/DQs8bUCEfl5/" target="_blank" class="card-link">Watch ↗</a>
+      <div class="vc">
+        <div class="vthumb t-trip"><div class="vt-txt">TRIP EDIT</div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="vbody">
+          <div class="vcat">Personal · Casual Edit · Travel · 2025</div>
+          <div class="vtitle">Recent Trip — Casual Edit</div>
+          <div class="vdesc">A personal travel edit done just for fun — rhythm cuts, colour grading, short-form pacing. No brief, no client. Just editing because I love it.</div>
+          <a href="https://drive.google.com/file/d/13LxT8LNgxZTzMeY3iwhp6inhNgxEJ2Az/view?usp=sharing" target="_blank" class="vlink">Watch ↗</a>
+        </div>
       </div>
     </div>
-
-    <div class="video-card fade-in">
-      <div class="card-thumb thumb-ph" style="background: linear-gradient(135deg, #1A0A0A 0%, #4A1010 100%);">
-        <div class="card-thumb-inner">PHOENIX 2023</div>
-        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="card-overlay"></div>
-      </div>
-      <div class="card-body">
-        <div class="card-cat">NFP · Conference Ad · 2023</div>
-        <div class="card-title">Phoenix Conference Ad</div>
-        <div class="card-desc">Event promotion video for Phoenix's annual conference. First video produced for the organisation.</div>
-        <a href="https://www.instagram.com/reel/DBISHglxeGb/" target="_blank" class="card-link">Watch ↗</a>
-      </div>
-    </div>
-
-    <div class="video-card fade-in">
-      <div class="card-thumb thumb-ig">
-        <div class="card-thumb-inner">VENTURE UWA</div>
-        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="card-overlay"></div>
-      </div>
-      <div class="card-body">
-        <div class="card-cat">Startup · Instagram Reel · 2025</div>
-        <div class="card-title">Venture UWA — Student Innovation Content</div>
-        <div class="card-desc">Short-form content for WA's leading student innovation centre. Entrepreneurship community storytelling.</div>
-        <a href="https://www.instagram.com/reel/DNMlIMfMFAS/" target="_blank" class="card-link">Watch ↗</a>
-      </div>
-    </div>
-
-    <div class="video-card fade-in">
-      <div class="card-thumb thumb-ai">
-        <div class="card-thumb-inner">AI INTRO</div>
-        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="card-overlay"></div>
-      </div>
-      <div class="card-body">
-        <div class="card-cat">AI Generated · Personal Brand · 2025</div>
-        <div class="card-title">Personal Brand Intro Video</div>
-        <div class="card-desc">AI-generated cinematic intro using Higgsfield Soul Cinema + CapCut. Full AI production pipeline end to end.</div>
-        <a href="https://drive.google.com/file/d/1yvSKoOZ_C7jvQVigEzlxJWNfuT0B7y9E/view?usp=sharing" target="_blank" class="card-link">Watch ↗</a>
-      </div>
-    </div>
-
-    <div class="video-card fade-in">
-      <div class="card-thumb thumb-ai" style="background: linear-gradient(135deg, #0A1A1A 0%, #1A3A4A 100%);">
-        <div class="card-thumb-inner">MENTAL HEALTH APP</div>
-        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="card-overlay"></div>
-      </div>
-      <div class="card-body">
-        <div class="card-cat">AI Generated · App Promo · 2025</div>
-        <div class="card-title">Mental Health App — Promo Video</div>
-        <div class="card-desc">AI-generated product promo. Emotional storytelling meets clean product showcase.</div>
-        <a href="https://drive.google.com/file/d/1QuWKuWspK4bQEZ1GEmccRX7xJEg8FfhI/view?usp=sharing" target="_blank" class="card-link">Watch ↗</a>
-      </div>
-    </div>
-
-    <div class="video-card fade-in">
-      <div class="card-thumb" style="background: linear-gradient(135deg, #1A1000 0%, #4A3000 100%);">
-        <div class="card-thumb-inner">TRIP EDIT</div>
-        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="card-overlay"></div>
-      </div>
-      <div class="card-body">
-        <div class="card-cat">Personal · Travel Edit · 2025</div>
-        <div class="card-title">Recent Travel Edit</div>
-        <div class="card-desc">Personal travel video — rhythm editing, colour grading, and pacing for short-form feel.</div>
-        <a href="https://drive.google.com/file/d/13LxT8LNgxZTzMeY3iwhp6inhNgxEJ2Az/view?usp=sharing" target="_blank" class="card-link">Watch ↗</a>
-      </div>
-    </div>
-
-    <div class="video-card fade-in">
-      <div class="card-thumb thumb-yt">
-        <div class="card-thumb-inner">SUPER SAM · 141K VIEWS</div>
-        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="card-overlay"></div>
-      </div>
-      <div class="card-body">
-        <div class="card-cat">YouTube · Long Form · Client Retainer · Age 18</div>
-        <div class="card-title">IFBB Pro Sam — Fitness YouTube Channel</div>
-        <div class="card-desc">3-month retainer. Long-form talking head, vlogs, workout series. One video hit 141K views. Full channel management.</div>
-        <a href="https://youtu.be/tQOVXu_twms" target="_blank" class="card-link">Watch ↗</a>
-      </div>
-    </div>
-
-    <div class="video-card fade-in">
-      <div class="card-thumb thumb-yt" style="background: linear-gradient(135deg, #0A0A1A 0%, #2A2A5C 100%);">
-        <div class="card-thumb-inner">SOUL PSYCHO</div>
-        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="card-overlay"></div>
-      </div>
-      <div class="card-body">
-        <div class="card-cat">YouTube · Long Form · Educational · Age 17</div>
-        <div class="card-title">Soul Psycho — Research & Education Channel</div>
-        <div class="card-desc">Talking head educational content. Thumbnails, titles, editing — full production. 28K+ views single video.</div>
-        <a href="https://youtu.be/m8BywSRfbRk" target="_blank" class="card-link">Watch ↗</a>
-      </div>
-    </div>
-
-    <div class="video-card fade-in">
-      <div class="card-thumb" style="background: linear-gradient(135deg, #0D1A0A 0%, #2A4A1A 100%);">
-        <div class="card-thumb-inner">PHOENIX LOGO</div>
-        <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="card-overlay"></div>
-      </div>
-      <div class="card-body">
-        <div class="card-cat">Motion · Logo Animation · 2025</div>
-        <div class="card-title">Phoenix — Logo Animation</div>
-        <div class="card-desc">Branded motion asset for Phoenix Support & Advocacy Service. Clean, professional, on-brand.</div>
-        <a href="https://drive.google.com/file/d/1OZ3sSvS0Wbrt7eOwLkhiQ6fo7Dq3y7ih/view?usp=sharing" target="_blank" class="card-link">Watch ↗</a>
-      </div>
-    </div>
-
   </div>
 
-  <!-- Stats row -->
-  <div class="stats-row fade-in">
-    <div class="stat-card">
-      <div class="stat-card-num">15K+</div>
-      <div class="stat-card-label">TEDxUWA Instagram views in 90 days · 2,094 followers</div>
+  <!-- PHOENIX -->
+  <div class="org-block fi">
+    <div class="org-header">
+      <div class="org-name">Phoenix Support & Advocacy Service</div>
+      <span class="otag">NFP · Perth WA · 2023–2026</span>
     </div>
-    <div class="stat-card">
-      <div class="stat-card-num">141K</div>
-      <div class="stat-card-label">Single video views · IFBB Pro Sam channel</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-card-num">+125%</div>
-      <div class="stat-card-label">Accounts reached growth · TEDxUWA last 30 days</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-card-num">3</div>
-      <div class="stat-card-label">YouTube channels managed as paid retainer at age 17–18</div>
+    <div class="vgrid">
+      <div class="vc">
+        <div class="vthumb t-ph"><div class="vt-txt">PHOENIX 2026</div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="vbody">
+          <div class="vcat">NFP · Instagram Reel · 2026</div>
+          <div class="vtitle">Latest Social Content</div>
+          <div class="vdesc">Short-form community content for a WA not-for-profit supporting vulnerable communities. Brand-aligned storytelling for Instagram reach.</div>
+          <a href="https://www.instagram.com/reel/DQs8bUCEfl5/" target="_blank" class="vlink">Watch ↗</a>
+        </div>
+      </div>
+      <div class="vc">
+        <div class="vthumb t-ph2"><div class="vt-txt">PHOENIX 2023</div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="vbody">
+          <div class="vcat">NFP · Conference Ad · 2023</div>
+          <div class="vtitle">Phoenix Conference — Promo Ad</div>
+          <div class="vdesc">Event promotion video for Phoenix's annual conference. First video produced for the organisation — built the template for all social content that followed.</div>
+          <a href="https://www.instagram.com/reel/DBISHglxeGb/" target="_blank" class="vlink">Watch ↗</a>
+        </div>
+      </div>
+      <div class="vc">
+        <div class="vthumb t-phlogo"><div class="vt-txt">LOGO ANIM</div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="vbody">
+          <div class="vcat">Motion · Logo Animation · 2025</div>
+          <div class="vtitle">Phoenix — Logo Animation</div>
+          <div class="vdesc">Branded motion asset for Phoenix's digital communications. Clean, professional, on-brand.</div>
+          <a href="https://drive.google.com/file/d/1OZ3sSvS0Wbrt7eOwLkhiQ6fo7Dq3y7ih/view?usp=sharing" target="_blank" class="vlink">Watch ↗</a>
+        </div>
+      </div>
     </div>
   </div>
-</section>
+
+  <!-- VENTURE UWA -->
+  <div class="org-block fi">
+    <div class="org-header">
+      <div class="org-name">Venture UWA</div>
+      <span class="otag">Student Innovation Centre · Perth · 2025</span>
+    </div>
+    <div class="vgrid solo">
+      <div class="vc">
+        <div class="vthumb t-vu"><div class="vt-txt">VENTURE UWA</div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="vbody">
+          <div class="vcat">Startup · Instagram Reel · 2025</div>
+          <div class="vtitle">Venture UWA — Student Innovation Content</div>
+          <div class="vdesc">Short-form content for WA's leading student innovation centre. Entrepreneurship community storytelling — quick turnaround, high engagement focus.</div>
+          <a href="https://www.instagram.com/reel/DNMlIMfMFAS/" target="_blank" class="vlink">Watch ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEDXUWA -->
+  <div class="org-block fi">
+    <div class="org-header">
+      <div class="org-name">TEDxUWA</div>
+      <span class="otag">2,094 Followers · 15K+ Views · 90 days</span>
+    </div>
+    <div class="vgrid solo">
+      <div class="vc">
+        <div class="vthumb t-tedx"><div class="vt-txt">TEDXUWA INSTAGRAM</div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="vbody">
+          <div class="vcat">Community Org · Instagram Content · 2022–2025</div>
+          <div class="vtitle">TEDxUWA — Full Instagram Content Management</div>
+          <div class="vdesc">Built and managed the full Instagram presence for TEDxUWA — reels, countdown content, event promos, speaker clips. 15,889 views in 90 days. +125% accounts reached growth in 30 days.</div>
+          <a href="https://www.instagram.com/tedxuwa" target="_blank" class="vlink">View Page ↗</a>
+        </div>
+      </div>
+    </div>
+    <div class="stats-strip">
+      <div class="ss"><div class="ss-num">15.8K</div><div class="ss-lbl">Views in 90 days · Jan–Apr 2026</div></div>
+      <div class="ss"><div class="ss-num">+125%</div><div class="ss-lbl">Accounts reached growth · last 30 days</div></div>
+      <div class="ss"><div class="ss-num">2,094</div><div class="ss-lbl">Followers · Community org page</div></div>
+      <div class="ss"><div class="ss-num">4,104</div><div class="ss-lbl">Single reel views · top performing post</div></div>
+    </div>
+  </div>
+
+  <!-- YOUTUBE CLIENTS -->
+  <div class="org-block fi">
+    <div class="org-header">
+      <div class="org-name">YouTube Clients</div>
+      <span class="otag">Paid Retainer · Age 17–18 · Long Form</span>
+    </div>
+    <div class="vgrid">
+      <div class="vc">
+        <div class="vthumb t-yt1"><div class="vt-txt">SUPER SAM · 141K</div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="vbody">
+          <div class="vcat">YouTube · Long Form · Fitness · 3-month retainer · Age 18</div>
+          <div class="vtitle">IFBB Pro Sam — Fitness & Bodybuilding</div>
+          <div class="vdesc">Full YouTube channel management — vlogs, workout series, talking head. One video hit 141K views. End-to-end: direction, editing, thumbnails, titles.</div>
+          <a href="https://youtu.be/tQOVXu_twms" target="_blank" class="vlink">Watch ↗</a>
+        </div>
+      </div>
+      <div class="vc">
+        <div class="vthumb t-yt2"><div class="vt-txt">SOUL PSYCHO</div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="vbody">
+          <div class="vcat">YouTube · Long Form · Education · 4-month retainer · Age 18</div>
+          <div class="vtitle">Soul Psycho — Research & Academic Education</div>
+          <div class="vdesc">Educational talking-head content. Thumbnails, editing, optimisation. One video hit 28K+ views. Canadian-based creator — remote production pipeline.</div>
+          <a href="https://youtu.be/m8BywSRfbRk" target="_blank" class="vlink">Watch ↗</a>
+        </div>
+      </div>
+      <div class="vc">
+        <div class="vthumb t-yt3"><div class="vt-txt">MYSTIC POONAM</div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="vbody">
+          <div class="vcat">YouTube · Long Form · Spirituality · Retainer · Age 17</div>
+          <div class="vtitle">Mystic Poonam — Astrology & Spirituality</div>
+          <div class="vdesc">First ever client. Video editing and thumbnail design for a spiritual content creator. Long-form talking head. Built the full workflow from zero at 17.</div>
+          <a href="https://youtu.be/0x_iPqlouq0" target="_blank" class="vlink">Watch ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI APP -->
+  <div class="org-block fi">
+    <div class="org-header">
+      <div class="org-name">AI Generated</div>
+      <span class="otag">Higgsfield · HeyGen · CapCut Pipeline</span>
+    </div>
+    <div class="vgrid solo">
+      <div class="vc">
+        <div class="vthumb t-mh"><div class="vt-txt">MENTAL HEALTH APP</div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="vbody">
+          <div class="vcat">AI Generated · App Promo · 2025</div>
+          <div class="vtitle">Mental Health App — Product Promo</div>
+          <div class="vdesc">AI-generated product promo video. Emotional storytelling meets clean product showcase. Full Higgsfield + CapCut pipeline from concept to delivery.</div>
+          <a href="https://drive.google.com/file/d/1QuWKuWspK4bQEZ1GEmccRX7xJEg8FfhI/view?usp=sharing" target="_blank" class="vlink">Watch ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 <!-- TOOLS -->
-<section>
-  <div class="section-label">Tools & Pipeline</div>
-  <div class="tools-grid fade-in">
-    <span class="tool-tag highlight">CapCut</span>
-    <span class="tool-tag highlight">Higgsfield AI</span>
-    <span class="tool-tag highlight">HeyGen</span>
-    <span class="tool-tag">Adobe Photoshop</span>
-    <span class="tool-tag">Canva</span>
-    <span class="tool-tag">Meta Business Suite</span>
-    <span class="tool-tag">GA4</span>
-    <span class="tool-tag">Instagram Reels</span>
-    <span class="tool-tag">TikTok</span>
-    <span class="tool-tag">YouTube</span>
-    <span class="tool-tag">Short Form</span>
-    <span class="tool-tag">Long Form</span>
-    <span class="tool-tag">B2B Ad Creative</span>
-    <span class="tool-tag">AI Video Generation</span>
-    <span class="tool-tag">Thumbnail Design</span>
+<div class="section fi">
+  <div class="sec-label">Tools & Pipeline</div>
+  <div class="tools-wrap">
+    <span class="tool on">CapCut</span><span class="tool on">Higgsfield AI</span><span class="tool on">HeyGen</span>
+    <span class="tool">Adobe Photoshop</span><span class="tool">Canva</span><span class="tool">Meta Business Suite</span>
+    <span class="tool">GA4</span><span class="tool">Instagram Reels</span><span class="tool">TikTok</span>
+    <span class="tool">YouTube</span><span class="tool">Short Form</span><span class="tool">Long Form</span>
+    <span class="tool">B2B Ad Creative</span><span class="tool">Thumbnail Design</span>
+    <span class="tool">AI Video Generation</span><span class="tool">Colour Grading</span>
   </div>
-</section>
+</div>
 
-<!-- BONUS ANSWER -->
-<section>
-  <div class="section-label">Bonus — What I'd change about B2B video editing</div>
-  <div class="bonus-box fade-in">
+<!-- BONUS -->
+<div class="section fi">
+  <div class="sec-label">Bonus Answer — B2B Editing</div>
+  <div class="bonus">
     <div class="bonus-q">What do I like — and what would I change?</div>
     <div class="bonus-a">
-      <p>What I like: B2B video that respects the viewer's intelligence. The best SaaS ads I've seen don't over-explain — they show the pain, sit in it for a moment, then let the product land as relief. That emotional restraint is what makes them memorable.</p>
-      <p>What I'd change: Most B2B content still leads with features, not feelings. "Here's what our platform does" instead of "here's the problem you've been silently dealing with." I'd push Coursebox's video content to lead with the human cost of bad onboarding before ever mentioning AI or courses — make the viewer nod before you sell anything.</p>
-      <p>On pacing: short form B2B ads move too slow. The first 2 seconds need to earn the next 8. I'd tighten cuts, use silence deliberately, and trust the viewer to keep up.</p>
+      <p>What I like: B2B video that respects the viewer's intelligence. The best SaaS ads don't over-explain — they show the pain, sit in it for a second, then let the product land as relief. That restraint is what makes them memorable.</p>
+      <p>What I'd change: Most B2B content still leads with features, not feelings. "Here's what our platform does" instead of "here's the problem you've been silently dealing with." I'd push Coursebox's content to lead with the human cost of bad onboarding before mentioning AI or courses — make the viewer nod before you sell anything.</p>
+      <p>On pacing: short form B2B moves too slow. The first 2 seconds need to earn the next 8. I'd tighten cuts, use silence deliberately, and trust the viewer to keep up.</p>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FOOTER CTA -->
-<div class="footer-cta">
+<!-- FOOTER -->
+<div class="footer fi">
   <div>
     <div class="footer-title">Let's work<br><span>together.</span></div>
-    <p style="color: var(--text-muted); margin-top: 16px; font-size: 14px;">linkedin.com/in/ratneshbhardwaj</p>
+    <div class="footer-sub">linkedin.com/in/ratnesh-bhardwajs-781527268</div>
   </div>
   <div class="btn-row">
-    <a href="https://www.linkedin.com/in/ratneshbhardwaj" target="_blank" class="btn btn-primary">LinkedIn ↗</a>
-    <a href="https://drive.google.com/file/d/180QcR6xijSG_fNf4mKAf0RwwsO2mrtf0/view?usp=sharing" target="_blank" class="btn btn-ghost">Coursebox Ad ↗</a>
+    <a href="https://www.linkedin.com/in/ratnesh-bhardwajs-781527268" target="_blank" class="btn btn-p">LinkedIn ↗</a>
+    <a href="https://drive.google.com/file/d/180QcR6xijSG_fNf4mKAf0RwwsO2mrtf0/view?usp=sharing" target="_blank" class="btn btn-g">Coursebox Ad ↗</a>
   </div>
 </div>
 
 <script>
-  // Cursor
-  const cursor = document.getElementById('cursor');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
+  const cur=document.getElementById('cursor');
+  document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px'});
+  document.querySelectorAll('a,button,.vc').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
   });
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('big'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
-  });
-
-  // Fade in on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('vis'),i*60)});
+  },{threshold:.08});
+  document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
